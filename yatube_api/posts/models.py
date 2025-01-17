@@ -2,12 +2,17 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 User = get_user_model()
+LENGTH_TITLE = 200
 
 
 class Group(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=LENGTH_TITLE)
     slug = models.SlugField(unique=True)
     description = models.TextField()
+
+    class Meta:
+        verbose_name = 'группа'
+        verbose_name_plural = 'Группы'
 
     def __str__(self):
         return self.title
@@ -29,6 +34,10 @@ class Post(models.Model):
         related_name='posts', blank=True, null=True
     )
 
+    class Meta:
+        verbose_name = 'пост'
+        verbose_name_plural = 'Посты'
+
     def __str__(self):
         return self.text
 
@@ -44,3 +53,10 @@ class Comment(models.Model):
     created = models.DateTimeField(
         'Дата добавления', auto_now_add=True, db_index=True
     )
+
+    class Meta:
+        verbose_name = 'коментарий'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return self.text
