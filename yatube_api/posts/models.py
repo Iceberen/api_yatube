@@ -1,12 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from .constants import LEN_CHARFIELD
+
 User = get_user_model()
-LENGTH_TITLE = 200
 
 
 class Group(models.Model):
-    title = models.CharField(max_length=LENGTH_TITLE)
+    title = models.CharField(max_length=LEN_CHARFIELD)
     slug = models.SlugField(unique=True)
     description = models.TextField()
 
